@@ -62,3 +62,52 @@ function onGeolocationSuccess(position) {
 function onGeolocationError(error) {
     $("#myLocation").html("<span class='err'>" + error.message + "</span>");
 }
+
+//=======================Video Capture Operations=======================//
+function captureVideo() {
+    // limit capture operation to 3 video clips
+    var options = { limit: 3 };
+
+    navigator.device.capture.captureVideo(onCaptureSuccess, captureError, options);
+}
+function onCaptureSuccess(mediaFiles) {
+    var i, path, len;
+    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+        path = mediaFiles[i].fullPath;
+        // do something interesting with the file
+        uploadFile(mediaFiles[i]);
+    }
+}
+function captureError(error) {
+    navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+}
+// Upload files to server
+function uploadFile(mediaFile) {
+    var ft = new FileTransfer(),
+        path = mediaFile.fullPath,
+        name = mediaFile.name;
+    var options = new FileUploadOptions();
+    options.chunkedMode = true;
+            options.fileKey = "file";
+            options.fileName = name;
+            options.mimeType = "video/mpeg";
+    var params = new Object();
+    params.value1 = "test";
+    params.value2 = "param";
+
+    options.params = params;
+
+    ft.upload(path, "http://www.ayoaya.co.il/video/upload.php",
+        function(result) {
+            alert("Response = " + r.response);
+            console.log('Upload success: ' + result.responseCode);
+            console.log(result.bytesSent + ' bytes sent');
+            console.log("Response = " + r.
+        },
+        function(error) {
+            alert('Error uploading file ' + path + ': ' + error.code);
+            console.log('Error uploading file ' + path + ': ' + error.code);
+        },
+        options); 
+    alert(mediaFile.fullPath);
+}

@@ -30,6 +30,7 @@
                 <ul data-role="listview">
                     <li><a href="#page1" data-transition="slide">UI Interaction Example</a></li>
                     <li><a href="#page2" data-transition="slide">Geolocation Example</a></li>
+                    <li><a href="#page3" data-transition="slide">Video Capture</a></li>
                 </ul>
             </div>
             <div data-role="footer" data-position="fixed" data-id="oneFooter">
@@ -76,5 +77,21 @@
                 <span class="footerText">Built with Icenium&trade;</span>
             </div>
         </div>
+        
+        <!-- The following page demonstrates how to access device video capture using Apache Callback (aka PhoneGap) -->
+        <div data-role="page" id="page3" data-add-back-btn="true">
+            <div data-role="header">
+                <h1>Video Capture Example</h1>
+            </div>
+            <div data-role="content">
+                <h1>Upload Video</h1>
+                <div>Let's try to capture and upload...</div>
+                <button data-icon="refresh" onClick="captureVideo();">Capture Video</
+            </div>
+            <div data-role="footer" data-position="fixed" data-id="oneFooter">
+                <span class="footerText">Built with Icenium&trade;</span>
+            </div>
+        </div>
+        
     </body>
     </html>
